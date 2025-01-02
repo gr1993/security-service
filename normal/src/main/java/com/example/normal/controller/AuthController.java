@@ -2,6 +2,7 @@ package com.example.normal.controller;
 
 import com.example.normal.dto.RegisterDto;
 import com.example.normal.dto.ResponseDto;
+import com.example.normal.entity.Role;
 import com.example.normal.entity.User;
 import com.example.normal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,12 @@ public class AuthController {
         String encodedPassword = passwordEncoder.encode(registerDto.getPassword());
         user.setPassword(encodedPassword);
         user.setAge(registerDto.getAge());
+
+        Role role = new Role();
+        role.setUsername(user.getUsername());
+        role.setRole("ROLE_user");
+        user.setRole(role);
+
         userRepository.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED)
