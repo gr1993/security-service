@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="_csrf" th:content="${_csrf.token}">
+  <meta name="_csrf_header" th:content="${_csrf.headerName}">
   <title>OTP 인증</title>
 
   <div th:replace="~{common/fragments.html :: head}"></div>
@@ -13,11 +15,64 @@
   <div class="d-flex justify-content-center align-items-center container">
     <div class="card py-5 px-3">
       <h5 class="m-0">모바일 인증</h5><span class="mobile-text">인증 코드를 입력해주세요</span>
-      <div class="d-flex flex-row mt-5"><input type="text" class="form-control" autofocus=""><input type="text" class="form-control"><input type="text" class="form-control"><input type="text" class="form-control"></div>
+      <div class="d-flex flex-row mt-5">
+        <input id="code1" type="text" class="form-control" autofocus="" maxlength="1" onkeydown="keydownEvent(event);">
+        <input id="code2" type="text" class="form-control" maxlength="1" onkeydown="keydownEvent(event);">
+        <input id="code3" type="text" class="form-control" maxlength="1" onkeydown="keydownEvent(event);">
+        <input id="code4" type="text" class="form-control" maxlength="1" onkeydown="keydownEvent(event);">
+      </div>
       <div class="text-center mt-5"><span class="d-block mobile-text">코드를 받지 못하셨나요?</span><span class="font-weight-bold text-danger cursor">재발송</span></div>
     </div>
   </div>
 
   <div th:replace="~{common/fragments.html :: body}"></div>
+  <script>
+    function keydownEvent(e) {
+      if(e.keyCode == 13) {
+        checkCode();
+      }
+    }
+
+    function checkCode() {
+        const csrfToken = $("meta[name='_csrf']").attr("content");
+        const csrfHeader = $("meta[name='_csrf_header']").attr("content");
+        let code = '';
+        for(let i = 1; i < 5; i++) {
+          const codeVal = $('#code' + i).val();
+          if (!codeVal) {
+            alert('코드를 입력하세요');
+            return;
+          }
+          code += codeVal;
+        }
+
+        const formData = "code=" + code;
+
+        $.ajax({
+            type: "POST",
+            url: "/loginAction",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            },
+            data: formData,
+            dataType: "json",
+            success: function(res) {
+                if (res.success) {
+                    location.href = "/user/main";
+                } else {
+                    if (res.msg) {
+                      alert(res.msg);
+                    } else {
+                      alert('인증 번호가 일치하지 않습니다.');
+                    }
+                }
+            },
+            error: function(request, status, error) {
+                alert('인증 중 오류가 발생하였습니다.');
+            }
+        });
+    }
+  </script>
+
 </body>
 </html>
