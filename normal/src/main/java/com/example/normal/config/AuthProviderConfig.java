@@ -1,9 +1,8 @@
 package com.example.normal.config;
 
-import com.example.normal.security.AuthStrategy;
-import com.example.normal.security.OtpAuthenticationProvider;
-import com.example.normal.security.SessionAuthStrategy;
-import com.example.normal.security.UserAuthenticationProvider;
+import com.example.normal.security.*;
+import com.example.normal.security.strategy.AuthStrategy;
+import com.example.normal.security.strategy.JwtAuthStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +33,7 @@ public class AuthProviderConfig {
 
     @Bean
     public AuthStrategy authStrategy() {
-        return new SessionAuthStrategy(userDetailsService);
+//        return new SessionAuthStrategy(userDetailsService);
+        return new JwtAuthStrategy();
     }
 }

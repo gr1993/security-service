@@ -2,6 +2,7 @@ package com.example.normal.security;
 
 
 import com.example.normal.dto.ResponseDto;
+import com.example.normal.security.strategy.AuthStrategy;
 import com.example.normal.service.UserService;
 import com.example.normal.util.HttpUtil;
 import jakarta.servlet.FilterChain;
@@ -67,7 +68,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
                 manager.authenticate(a);
 
                 //세션 방식, JWT 방식 선택적으로 처리 가능
-                authStrategy.ProcessAuthentication(request, a);
+                authStrategy.ProcessAuthentication(request, response, a);
 
                 responseDto.setSuccess(true);
             }
