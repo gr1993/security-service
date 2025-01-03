@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>로그인</title>
 
     <div th:replace="~{common/fragments.html :: head}"></div>
@@ -15,7 +17,7 @@
             <div class="col-md-6 offset-md-3">
 
                 <div class="card my-5">
-                    <form class="card-body cardbody-color p-lg-5" method="post" action="/loginAction">
+                    <form id="loginForm" class="card-body cardbody-color p-lg-5">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
                         <div class="text-center">
@@ -30,7 +32,7 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-color px-5 mb-5 w-100">로그인</button>
+                            <button type="button" class="btn btn-color px-5 mb-5 w-100" onclick="login();">로그인</button>
                         </div>
                         <div id="emailHelp" class="form-text text-center mb-5 text-dark">
                             등록하지 않으셨나요?
@@ -44,5 +46,34 @@
     </div>
 
     <div th:replace="~{common/fragments.html :: body}"></div>
+
+    <script>
+        function login() {
+            const csrfToken = $("meta[name='_csrf']").attr("content");
+            const csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+            const formData = $('#loginForm').serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/loginAction",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(csrfHeader, csrfToken);
+                },
+                data: formData,
+                dataType: "json",
+                success: function(res) {
+                    if (res.success) {
+                        location.href = "/code";
+                    } else {
+                        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+                    }
+                },
+                error: function(request, status, error) {
+                    alert('로그인중 오류가 발생하였습니다.');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
