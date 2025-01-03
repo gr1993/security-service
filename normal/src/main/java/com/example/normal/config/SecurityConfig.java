@@ -1,6 +1,7 @@
 package com.example.normal.config;
 
 import com.example.normal.security.CustomAuthenticationFilter;
+import com.example.normal.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +15,14 @@ public class SecurityConfig {
     @Autowired
     private CustomAuthenticationFilter customAuthenticationFilter;
 
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .addFilterAt(customAuthenticationFilter, BasicAuthenticationFilter.class)
+//            .addFilterAfter(jwtAuthenticationFilter, BasicAuthenticationFilter.class)
             .formLogin(form -> {
                 form.loginPage("/login")
                     .usernameParameter("username")
@@ -25,18 +30,19 @@ public class SecurityConfig {
             })
             .logout(logout -> {
                 logout.logoutUrl("/logout")
-                      .deleteCookies("JSESSIONID", "remember-me");
+                      .deleteCookies("JSESSIONID", "jwt", "remember-me");
             })
             .authorizeHttpRequests(authorizeRequests -> {
                 authorizeRequests
                     .requestMatchers("/admin/**").hasAnyRole("admin")
-                    .requestMatchers("/user/**").authenticated()
+                    .requestMatchers("/user/**").hasAnyRole("user")
                     .requestMatchers("/css/**").permitAll()
                     .requestMatchers(
                         "/login",
                         "/register",
                         "/logout",
-                        "/code"
+                        "/code",
+                        "/error"
                     ).permitAll()
                     .anyRequest().authenticated();
             });
