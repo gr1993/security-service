@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>로그인</title>
 
-    <div th:replace="common/fragments.html :: head"></div>
+    <div th:replace="~{common/fragments.html :: head}"></div>
 
     <!-- login form 출처 : https://codepen.io/rajashekhar90/pen/XWNaapG -->
     <link rel="stylesheet" href="/css/login.css" />
@@ -15,7 +15,7 @@
             <div class="col-md-6 offset-md-3">
 
                 <div class="card my-5">
-                    <form class="card-body cardbody-color p-lg-5" method="post" action="/login">
+                    <form class="card-body cardbody-color p-lg-5" method="post" action="/loginAction">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
                         <div class="text-center">
@@ -43,6 +43,6 @@
         </div>
     </div>
 
-    <div th:replace="common/fragments.html :: body"></div>
+    <div th:replace="~{common/fragments.html :: body}"></div>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>회원가입</title>
 
-    <div th:replace="common/fragments.html :: head"></div>
+    <div th:replace="~{common/fragments.html :: head}"></div>
 
     <!-- login form 출처 : https://codepen.io/rajashekhar90/pen/XWNaapG -->
     <link rel="stylesheet" href="css/register.css" />
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div th:replace="common/fragments.html :: body"></div>
+    <div th:replace="~{common/fragments.html :: body}"></div>
 
     <script>
         (function () {
