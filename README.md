@@ -22,7 +22,7 @@
 * mysql connector
 
 ### 시연 영상
-[유튜브 링크](https://i9.ytimg.com/vi_webp/-2XIdglsYlg/mq3.webp?sqp=CLyF3rsG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLBIznEAwwGVq9-2KMUxZKfEzmhJaw)](https://youtu.be/-2XIdglsYlg)
+[유튜브 링크](https://youtu.be/-2XIdglsYlg)
 ![login image](./video/normal-video.gif)
 
 
