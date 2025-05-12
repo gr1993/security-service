@@ -21,8 +21,7 @@
 * JPA
 * mysql connector
 
-### 시연 영상
-[유튜브 링크](https://youtu.be/-2XIdglsYlg)
+### 시연 영상 : [유튜브로 이동](https://youtu.be/-2XIdglsYlg)
 ![login image](./video/normal-video.gif)
 
 
