@@ -29,7 +29,7 @@ public class SessionAuthStrategy implements AuthStrategy {
         UserAuthentication auth = new UserAuthentication(userDetails.getUsername(), null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        // 세션에 인증 정보를 저장
+        // 세션에 인증 정보를 저장 (다음 요청 시, SecurityContextPersistenceFilter가 세션에서 SecurityContext를 읽어들여 보안 컨텍스트를 설정함)
         HttpSession session = request.getSession();
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
     }
