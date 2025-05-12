@@ -1,8 +1,10 @@
 # 프로젝트 구조
 
+<pre><code>```
 security-service/
 ├── normal/         # 일반 로그인(세션 기반 또는 JWT 기반 인증)
-├── oauth2/         # Ouath2 기반 소셜 로그인  
+├── oauth2/         # Ouath2 기반 소셜 로그인
+``` </code></pre>
 
 
 # 일반 로그인
