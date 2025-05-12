@@ -32,11 +32,15 @@ security-service/
 ![login image](./video/normal-video.gif)
 
 
-# Ouath2 기반 소셜 로그인
-OAuth2 기반의 소셜 로그인 기능을 제공(Oauth2 클라이언트)  
-인증 이후 JWT 토큰 발급 및 서비스 이용 가능, 로그아웃 기능을 제공하는 간단한 프로젝트
+# OAuth 2 기반 소셜 로그인
+OAuth 2 기반의 소셜 로그인 기능을 제공(OAuth 2 클라이언트)  
+인증 이후 JWT 토큰 발급 및 서비스 이용 가능, 로그아웃 기능을 제공하는 간단한 프로젝트  
+<br/>
+OAuth 2 인증 제공자를 사용하기 위해 각 서비스에 가입하여 설정하는 방법은 아래 블로그에 정리해두었으므로 참고하길 바란다.  
+https://little-pecorino-c28.notion.site/3d41e7960e014a9b83129beb7fd2f3c3
 
-### OAuth2 인증 제공자
+
+### OAuth 2 인증 제공자
 * 네이버
 * 카카오
 
