@@ -46,7 +46,8 @@ OAuth 2 인증 제공자를 사용하기 위해 각 서비스에 가입하여 �
 * 카카오
 
 ### 사용 기술
-* Spring Security 6.4.2
+* Spring Security 6.4.5
+* spring-boot-starter-oauth2-client 6.4.5
 
 
 ## HTML 출처 (무료 템플릿 사이트)
