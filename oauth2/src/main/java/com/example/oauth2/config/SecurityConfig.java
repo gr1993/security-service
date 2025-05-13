@@ -20,11 +20,14 @@ public class SecurityConfig {
                     //  baseUri 설정 제거 → 기본 /oauth2/authorization/{registrationId} 사용
                     // oauth.authorizationEndpoint(end -> end.baseUri("/kakao/login")) // OAuth2 인증 요청을 시작하는 url 설정
                     oauth.loginPage("/login") // Spring Security의 로그인 페이지가 아닌 커스텀 로그인 페이지 경로 지정
+                            .defaultSuccessUrl("/") // 사용자가 지정한 페이지가 없고 로그인 성공 시 이동할 URL
                 )
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests
                             .requestMatchers(
-                                    "/login"
+                                    "/login",
+                                    "/.well-known/**", // 브라우저의 자동요청 문제로 경로 허용
+                                    "/error"
                             ).permitAll()
                             .anyRequest().authenticated();
                 });
