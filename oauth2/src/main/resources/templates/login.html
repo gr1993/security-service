@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>로그인</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            background: #f9f9f9;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        a.login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 1rem 0;
+            padding: 0.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .kakao {
+            background-color: #FEE500;
+            color: #3C1E1E;
+        }
+        .naver {
+            background-color: #03C75A;
+        }
+        .google {
+            background-color: #4285F4;
+        }
+        .login-btn img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
-    로그인!
+    <div class="login-container">
+        <h2>소셜 로그인</h2>
+
+        <a href="/oauth2/authorization/kakao" class="login-btn kakao">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kakaotalk.svg" alt="Kakao Logo" style="filter: invert(1);">
+            카카오 로그인
+        </a>
+
+        <a href="/oauth2/authorization/naver" class="login-btn naver">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/naver.svg" alt="Naver Logo">
+            네이버 로그인
+        </a>
+
+        <a href="/oauth2/authorization/google" class="login-btn google">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" alt="Google Logo" style="background:white; border-radius:50%; padding:2px;">
+            구글 로그인
+        </a>
+    </div>
 </body>
 </html>

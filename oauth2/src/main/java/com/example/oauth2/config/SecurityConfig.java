@@ -18,8 +18,8 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable) // 기본 login form 비활성화
                 .oauth2Login(oauth ->
                     //  baseUri 설정 제거 → 기본 /oauth2/authorization/{registrationId} 사용
-                    oauth.authorizationEndpoint(end -> end.baseUri("/kakao/login")) // OAuth2 인증 요청을 시작하는 url 설정
-                          .loginPage("/login") // Spring Security의 로그인 페이지가 아닌 커스텀 로그인 페이지 경로 지정
+                    // oauth.authorizationEndpoint(end -> end.baseUri("/kakao/login")) // OAuth2 인증 요청을 시작하는 url 설정
+                    oauth.loginPage("/login") // Spring Security의 로그인 페이지가 아닌 커스텀 로그인 페이지 경로 지정
                 )
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests
