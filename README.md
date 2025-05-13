@@ -27,6 +27,10 @@ security-service/
 * Spring Security 6.4.2
 * JPA
 * mysql connector
+* thymeleaf
+	* 정적 리소스로 html을 제공(/resources/static 경로)하면 .html 확장자까지 붙여야 한다.
+	* .html 확장자가 붙은 리소스는 Security 엔드포인트 보호 설정에 충돌이 될 수 있다.
+	* 그러므로 viewResolver를 사용하여 확장자를 붙이지 않도록 추가한다.
 
 ### 시연 영상 : [유튜브로 이동](https://youtu.be/-2XIdglsYlg)
 ![login image](./video/normal-video.gif)
@@ -49,7 +53,13 @@ OAuth 2 인증 제공자를 사용하기 위해 각 서비스에 가입하여 �
 ### 사용 기술
 * Spring Security 6.4.5
 * spring-boot-starter-oauth2-client 6.4.5
+* thymeleaf
+	* 정적 리소스로 html을 제공(/resources/static 경로)하면 .html 확장자까지 붙여야 한다.
+	* .html 확장자가 붙은 리소스는 Security 엔드포인트 보호 설정에 충돌이 될 수 있다.
+	* 그러므로 viewResolver를 사용하여 확장자를 붙이지 않도록 추가한다.
 
+### 시연 영상
+![oauth2 image](./video/oauth2-video.gif)
 
 ## HTML 출처 (무료 템플릿 사이트)
 * https://freefrontend.com/bootstrap-code-examples
