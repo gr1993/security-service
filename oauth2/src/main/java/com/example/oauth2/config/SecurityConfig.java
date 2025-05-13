@@ -1,5 +1,7 @@
 package com.example.oauth2.config;
 
+import com.example.oauth2.service.CustomOAuth2UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    private CustomOAuth2UserService customOAuth2UserService;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -26,6 +32,9 @@ public class SecurityConfig {
                     // oauth.authorizationEndpoint(end -> end.baseUri("/kakao/login")) // OAuth2 인증 요청을 시작하는 url 설정
                     oauth.loginPage("/login") // Spring Security의 로그인 페이지가 아닌 커스텀 로그인 페이지 경로 지정
                             .defaultSuccessUrl("/") // 사용자가 지정한 페이지가 없고 로그인 성공 시 이동할 URL
+                            .userInfoEndpoint(userInfo ->
+                                    userInfo.userService(customOAuth2UserService) // OAuth 2 사용자정보 처리 서비스 등록
+                            )
                 )
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests
